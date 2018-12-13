@@ -1,6 +1,6 @@
 <?php
 	//Controlador de vista privada
-	include ('../../controllers/controllerSecurity.php');
+	include ('../../controllers/controlSecurity.php');
 
 	//Header
 	include ('header.php');
