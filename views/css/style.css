@@ -1,0 +1,143 @@
+/*Variables personalizadas*/
+:root {
+	/*Gris Blanco*/
+	--mainBack1:	#eee;
+	/*Azul Oscuro*/
+	--mainBack2:	#001831;
+	/*Verde Oscuro*/
+	--mainBack3:	#27494c!important;
+	/*Rojo Oscuro*/
+	--mainBack4:	#600c0c;
+	/*Purpura oscuro*/
+	--mainBack5:	#31002f;
+	/*Rojo */
+	--mainResal1:	#dc3545;
+}
+
+
+/*Estilos para login*/
+#login {
+	margin:		0;
+	padding: 	0;
+	background:	var(--mainBack1);
+}
+#login .login-div{
+	top:			50%;
+	left:			50%;
+	text-align:		center;
+	vertical-align:	middle;
+	background:		red;
+}
+#login .login-div-logo .login-user-icon{
+	height:	25%;
+	width:	25%
+}
+#login .login-div-form{
+	background: blue;
+	height:	200px;
+	width:	300px;
+}
+
+
+/*
+#login .login-div{
+	height: 	400px;
+	width:		300px;
+	top:		50%;
+	left:		50%;
+	background: var(--mainBack2);
+	color:		white;
+	position:	absolute;
+	transform:	translate(-50%, -50%);
+	text-align:	center;
+	border-radius: 10px;
+}
+*
+#login .login-user-icon{
+	width: 			100px;
+	background:		white;
+	border-radius:	50%;
+	transform:		translate(0%,-50%);
+}
+#login .login-div-form{
+	padding-left: 	10%;
+	padding-right:	10%;
+}
+#login .login-forgot{
+	text-decoration:	none;
+	color:				var(--mainResal1);
+}
+#login .error{
+	height:		35px;
+}
+
+
+/*Estilos para navbar superior*/
+.navbar{
+	background: var(--mainBack2);
+	background: linear-gradient(75deg, var(--mainBack2) 10%, var(--mainBack3) 90%);
+}
+
+
+
+
+/*sidebar izquierdo*/
+
+/*Barra acortada*/
+
+
+#sidebar-left{
+	background:		var(--mainBack3);
+	height:			calc(100% - 56px);
+	width:			200px;
+	color:			white;
+	position:		absolute;
+	padding:		5px 10px;
+	vertical-align:	middle;
+}
+#sidebar-left li{
+	padding-bottom: 10px;
+}
+#sidebar-left i{
+	font-size:		25px;
+}
+#sidebar-left .nav-link{
+	text-align:			left;
+	text-decoration: 	none;
+	color:				white;
+}
+#sidebar-left .nav-link:hover{
+	text-shadow:	0 0 25px #fff;
+}
+#sidebar-left .nav-link span{
+	position:		absolute;
+	width:			100%;
+	padding-left:	15px;
+}
+/*Elemento en la parte inferior*/
+#sidebar-left .bottom{
+	top:		calc(100% - 56px);
+	position:	absolute;
+}
+
+
+
+
+
+
+
+
+
+/*Contenido*/
+/*Contenido expandido*/
+#content{
+	width:	calc(100% - 200px);
+}
+/*Contenido corto*/
+#content{
+	background:	var(--mainBack1);
+	right:		0%;
+	color:		black;
+	position:	absolute;
+	height:		calc(100% - 56px);
+}

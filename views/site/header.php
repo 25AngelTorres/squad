@@ -39,10 +39,10 @@
 		<!-- Bootstrap core CSS-->
 		<link rel='stylesheet' type='text/css' href='../css/bootstrap.min.css' >
 		<!-- fonts a utilizar-->
-		<link rel='stylesheet' type="text/css" href='../../librs/fontawesome-free/css/all.min.css' >
+		<link rel='stylesheet' type='text/css' href='../../librs/fontawesome-free/css/all.min.css' >
 		
 		<!-- Hoja de estilo personalizada -->
-		<link rel='stylesheet' type='text/css" href="../css/style.css' >
+		<link rel='stylesheet' type='text/css' href='../css/style.css' >
 		
 		
 	</head>
