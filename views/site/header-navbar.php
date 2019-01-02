@@ -107,17 +107,108 @@
 	
 	<!---Contenido--->
 	<div class='wrapper'>
-	
-		<!-- Sidebar -->
+		
+		<!-- sidebar-left -->
 		<div id='sidebar-left' class=''>
-			<ul class='navbar-nav'>
-				<li class='nav-item'>
-					<a class ='nav-link' href='' id='9001'>
+			<!-- lista isos -->
+			<ul	id='' class=''>
+				<li>
+					<a id='' class='' href='' role=''>
+						<i class='far fa-eye'></i> 
+						<spam><h5>Título 1</h5></spam>
+					</a>
+					<!-- lista procedimientos -->
+					<div>
+						<ul id='' class='navbar-nav'>
+							<li class='nav-item'>
+								<a class="nav-link" href=" ">
+									<i class=""></i>
+									<span>Manage Documentation</span>
+								</a>
+							</li>
+							<li>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					<a id='' class='' href='' role=''>
+						<i class='fab fa-envira'></i> 
+						<spam>
+							<h5>
+								Título 2
+							</h5>
+						</spam>
+					</a>
+				</li>
+				<li>
+					<a id='' class='' href='' role=''>
+						<i class='fas fa-cogs'></i>
+						<span>
+							<h5>
+								Configurar
+							</h5>
+						</span>
+					</a>
+				</li>
+			</ul><!-- lista isos -->
+		</div>
+	
+		<!-- Sidebar --
+		<div id='sidebar-left' class=''>
+		
+		
+		
+		
+		<!-- 
+			<ul class=''>
+				<li class=''>
+					<a id='iso1'	class ='' href='' >
 						<div class='nav-item-icon' id=''>
 						<i class='far fa-eye'></i> 
 						
 						<span><h5>ISO 9001</h5></span>
 					</a>
+					<div id='' class='sub-navbar-nav' >
+						<ul class='' id='1'>
+							<li class='nav-item dropdown'>
+								<a id='dropdown-toggle' class='nav-link dropdown-toggle' role='bottom'>
+									<span>
+										Algo 1
+									</span>
+								</a>
+								
+								<div id='menu-dropdown-toggle' class='dropdown-menu'>
+									<h6 class='dropdown-header'>
+										Título 1
+									</h6>
+									<a class='dropdown-item' href=''>
+										algo 1.1
+									</a>
+									<a class='dropdown-item' href=''>
+										algo 1.2
+									</a>
+									
+									<div class='dropdown-divider'></div>
+									
+									<h6 class='dropdown-header'>
+										Título 2
+									</h6>
+									<a class='dropdown-item' href=''>
+										algo 2.1
+									</a>
+									
+								</div>
+								
+							</li>
+							<li class=''>
+								Algo 2
+							</li>
+							<li class=''>
+								Algo 3
+							</li>
+						</ul>
+					</div>
 				
 				</li>
 				<li class='nav-item'>
@@ -128,9 +219,10 @@
 				
 				</li>
 			</ul>
+		--
 			
 			<div class='bottom nav-item'>
-				<a class ='nav-link' href='' id='tools'>
+				<a class ='nav-link' href='config-user.php' id='tools'>
 					<i class='fas fa-cogs'></i>
 					<span> Sidebar</span>
 				</a>

@@ -15,7 +15,7 @@
 		});
 	})(jQuery); // End of use strict
 	
-	*/
+	*
 	(function($){
 	$('#sidebarToggle-leftbar').on('click', function () {
             // open sidebar
@@ -40,4 +40,12 @@
             //$('.collapse.in').toggleClass('in');
             //$('a[aria-expanded=true]').attr('aria-expanded', 'false');
         });
+		*/
+		
+	// toggle the dropdown-toggle
+	$(".dropdown-toggle").on('clic',function(e) {
+		e.preventDefault();
+		$('.dropdown-menu').toggleClass('show');
+	}// toggle the dropdown-toggle
+		
 	})(jQuery); // End of use strict
