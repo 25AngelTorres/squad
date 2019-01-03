@@ -42,10 +42,15 @@
         });
 		*/
 		
-	// toggle the dropdown-toggle
-	$(".dropdown-toggle").on('clic',function(e) {
-		e.preventDefault();
-		$('.dropdown-menu').toggleClass('show');
-	}// toggle the dropdown-toggle
+	// Toggle the dropdown-toggle
+  $(".dropdown-toggle").on('click',function(e) {
+    e.preventDefault();
+	if($("#menu-"+$(this).attr("id")).hasClass("show")){
+		$(".dropdown-menu-sidebar").removeClass("show");
+	}else{
+		$(".dropdown-menu-sidebar").removeClass("show");
+		$("#menu-"+$(this).attr("id")).addClass("show");
+	}
+  });//togge the dropdown-toggle
 		
 	})(jQuery); // End of use strict

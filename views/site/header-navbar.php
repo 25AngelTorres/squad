@@ -126,6 +126,24 @@
 									<span>Manage Documentation</span>
 								</a>
 							</li>
+							<li id='' class='nav-item dropdown'>
+								<a id='' class='nav-link dropdown-toggle' href='' role='botton'>
+									<i class='fas fa-layer-group'></i>
+									<span>1.1</span>
+								</a>
+								
+								<div class='dropdown-menu dropdown-menu-sidebar' id='menu-dropdown-toggle'>
+									<h6 class='dropdown-header'>1.1 título</h6>
+									<a ip='' class='dropdown-item' href=''>1.1.1 enlace </a>
+									
+									<div class='dropdown-divider'> </div>
+									
+									
+								</div>
+							</li>
+							
+							
+							
 							<li>
 							</li>
 						</ul>
