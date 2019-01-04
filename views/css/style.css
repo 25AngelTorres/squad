@@ -101,6 +101,11 @@
 #sidebar-left i{
 	font-size:		25px;
 }
+#sidebar-left ul{
+	list-style:	none;
+	padding-left:	10px;
+}
+
 #sidebar-left .nav-link{
 	text-align:			left;
 	text-decoration: 	none;
@@ -114,14 +119,12 @@
 	width:			100%;
 	padding-left:	15px;
 }
+
 /*Elemento en la parte inferior*/
 #sidebar-left .bottom{
 	top:		calc(100% - 56px);
 	position:	absolute;
 }
-
-
-
 
 
 

@@ -112,8 +112,8 @@
 		<div id='sidebar-left' class=''>
 			<!-- lista isos -->
 			<ul	id='' class=''>
-				<li>
-					<a id='' class='' href='' role=''>
+				<li class='sidebar-left-padre-item'>
+					<a id='' class='' href='#' role=''>
 						<i class='far fa-eye'></i> 
 						<spam><h5>Título 1</h5></spam>
 					</a>
@@ -127,12 +127,12 @@
 								</a>
 							</li>
 							<li id='' class='nav-item dropdown'>
-								<a id='' class='nav-link dropdown-toggle' href='' role='botton'>
+								<a id='dropdown-toggle1' class='nav-link dropdown-toggle' href='#' data-toggle='dropdown' aria-expanded='true'>
 									<i class='fas fa-layer-group'></i>
 									<span>1.1</span>
 								</a>
 								
-								<div class='dropdown-menu dropdown-menu-sidebar' id='menu-dropdown-toggle'>
+								<div class='dropdown-menu' id='menu-dropdown-toggle' role='menu' aria-labelledby='dropdown-toggle1'>
 									<h6 class='dropdown-header'>1.1 título</h6>
 									<a ip='' class='dropdown-item' href=''>1.1.1 enlace </a>
 									
