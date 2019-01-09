@@ -141,4 +141,56 @@
 	color:		black;
 	position:	absolute;
 	height:		calc(100% - 56px);
+	padding-left:	25px;
+	padding-right:	25px;
+	padding-top:	10px;
+	padding-bottom:	25px;
+	font-weight:	100;
+}
+#content .header{
+	width:		100%;
+	background:	white;
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 0px solid #000000;
+	font-size:		30px;
+	padding-left:	5%;
+}
+#content .body{
+	padding:	10px 25px 25px 25px;
+	width:		100%;
+	height:		calc(100% - 56px);
+	position:	relative;
+	background:	white;
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 0px solid #000000;
+	margin-top:	10px;
+}
+#content .body h4{
+	padding-bottom:	20px;
+}
+#form-admin-user .form-update {
+	display:	none;
+}
+#form-admin-user .form-update.show{
+	display:	block;
+}
+#form-admin-user .form-delete {
+	display:	none;
+}
+#form-admin-user .form-delete.show{
+	display:	block;
+}
+#btn-update .active{
+	color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+#btn-delete .active{
+	color: #fff;
+	background:	#dc3545;
+	border-color: #dc3545;
 }

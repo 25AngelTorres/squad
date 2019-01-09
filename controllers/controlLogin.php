@@ -53,14 +53,13 @@ Contine las clases
 		**/
 		public function iniciarSesion($data){
 			session_start();
-			$_SESSION['usuario'] = $data['0']['user'];
+			$_SESSION['user'] = $data['0']['user'];
 			$_SESSION['id_usuario'] = $data['0']['id_usuario'];
 			
 			//Si la contraseña es temporal dirigir al formulario para actualizar contraseña
-			if($data['0']["reset_password"]){
-				//die("resetPassword");
+			if($data['0']["reset_password"]>0){
 				//header("Location: newPassword.php");
-				header("Location: home.php");
+				header("Location: config-user.php");
 				//Agregar notificación de cambio de contraseña, y crear nueva contraseña
 			}else{
 				header("Location: home.php");
@@ -120,7 +119,12 @@ Contine las clases
 			//Cuerpo del mensaje
 			$menssage 	= 'Se ha generado un nuevo password temporal para poder acceder a INFINISH QMS
 			
-			Password: '.$tempPassword;
+			Password: '.$tempPassword.'
+			
+			
+			Por favor, al ingresar, rgistre una nueva ocntraseña de acceso.
+			
+			Gracias';
 			//Ausnto del mensaje
 			$subject 	= 'INFINISH QMS Password ';
 			$recipient	= $rows['0']['mail'];

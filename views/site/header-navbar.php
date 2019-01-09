@@ -10,7 +10,7 @@
 
 	<!-- Barra superior -->
 	<nav class='navbar navbar-expand navbar-dark static-top'>
-		<a class='navbar-brand text-white mr-1' href=''>iQMS</a>
+		<a class='navbar-brand text-white mr-1' href='home.php'>iQMS</a>
 		<button class='btn btn-link btn-sm text-white order-1 order-sm-0 sidebarToggle-leftbar' id='sidebarToggle-leftbar' href='#'>
 			<i class='fas fa-bars'> </i>
 		</button>
@@ -73,10 +73,11 @@
 					<!---Agregar aqui nombre de usuario--->
 					<i class="fas fa-user-circle "> 
 					</i>
+					<?php echo $_SESSION['user']; ?>
 				</a>
 				<!-- Menú desplegable usuario -->
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-					<a class="dropdown-item" href="formSettingsUser.php">Settings</a>
+					<a class="dropdown-item" href="config-user.php">Settings</a>
 					<!-- Barra divisor -->
 					<div class="dropdown-divider"></div>
 					<!-- Página logout -->
@@ -111,8 +112,8 @@
 		<!-- sidebar-left -->
 		<div id='sidebar-left' class=''>
 			<!-- lista isos -->
-			<ul	id='' class=''>
-				<li class='sidebar-left-padre-item'>
+			<ul	id='' class='navbar-nav'>
+				<li id='sidebar-father-1' class='nav-item'>
 					<a id='' class='' href='#' role=''>
 						<i class='far fa-eye'></i> 
 						<spam><h5>Título 1</h5></spam>

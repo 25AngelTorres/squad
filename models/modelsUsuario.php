@@ -7,16 +7,17 @@ class modelUsuario extends modelModelo{
     public $pk = 'id_usuario';
     
     //Columnas
-    public $atributos = array(
-        'user'			=>array(),
-        'name'			=>array(),
+    public $atributos 		= array(
+        'user'				=>array(),
+        'name'				=>array(),
 		'mail'				=>array(),
-        'password'		=>array(),
+        'password'			=>array(),
 		'reset_password'	=>array(),
     );
     
 	//Variable que almacena errores
     public $errores = array( );
+	public $success	= array( );
     
 	//Variables locales para manejo de columnas
     private $user;
