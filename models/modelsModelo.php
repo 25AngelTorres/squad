@@ -26,9 +26,24 @@ class modelModelo extends modelConexion {
 	@tabla	-	Record Set que se obtine al realizar una consulta a ls BD
 	@fields	arreglo con nombre de las columnas y valores a insertar en ellas
 	*/
-    public function insertar($rs, $fields) {
-        $sql_insert = $this->db->GetInsertSQL($rs, $fields);
-        return $this->get_error($this->db->Execute($sql_insert), 'Error en Modelo.inserta');
+    public function inserta($rs, $fields) {
+      $sql_insert = $this->db->GetInsertSQL($rs, $fields);
+      return $this->get_error($this->db->Execute($sql_insert), 'Error en Modelo.inserta');
+    }
+	
+	/**
+	FUNCIÓN PARA ACTUALIZAR UN REGISTRO EN LA BD
+	**/
+    public function actualiza($sql_update) {
+      return $this->get_error($this->db->Execute($sql_update), 'Error al actualizar');
+    }
+	
+	/**
+	FUNCION PARA ELIMINAR UN REGISTRO EN LA BD a travez de un id
+	**/
+	public function elimina($id) {
+		$sql = 'delete from '.$this->nombre_tabla.' where '.$this->pk.' = '.$id;
+        return $this->get_error($this->db->Execute($sql), "Error al eliminar");
     }
 
 	//Funcion para leer el error al momento de realizar alguna operación en BD
@@ -50,23 +65,10 @@ class modelModelo extends modelConexion {
         $grid->Render($rows_per_page = $num);
     }
 	
-	/**
-	**/
-    public function actualiza($sql_update) {
-            return $this->get_error($this->db->Execute($sql_update), 'Error al actualizar');
-    }
+	
 
 	//Elimina registro de la BD.
-    public function elimina($where = 'null') {
-
-        if ($where == 'null')
-            $sql = "DELETE FROM " . $this->nombre_tabla;
-        else
-            $sql = "DELETE FROM " . $this->nombre_tabla . "
-                    WHERE " . $where;
-
-        return $this->get_error($this->db->Execute($sql), "Error al eliminar");
-    }
+    
 
 //Generar select
     public function getDropDown($id_tabla,$nombre_columna,$tabla,$name,$id,$where = ' '){
@@ -83,7 +85,7 @@ class modelModelo extends modelConexion {
 	
 	/*
 	Funcion para actualizar registros en la BD
-	*/
+	*//*
 	public function updateRegistro($record,$id,$atributos) {
 		if (is_integer($id)) {
             $sql = "SELECT * FROM  " . $tabla . " 
@@ -94,7 +96,7 @@ class modelModelo extends modelConexion {
             $rs['nombre'] = 'PEDROOOOOOO';
             $rs['email'] = 'pedroo@nnnnn.mmm';
             $rs['password'] = '0000000';*/
-
+/*
 			echo('<pre>');
 			print_r($record);
 			print_r($this->atributos);
@@ -111,7 +113,7 @@ class modelModelo extends modelConexion {
             die('OJO id no es entero (int() @variable) ');
         }
 			
-	}
+	}*/
 	
 }
 ?>

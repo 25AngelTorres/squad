@@ -7,7 +7,7 @@
 	
 	include	('../../Models/modelsConexion.php');
 	include	('../../Models/modelsModelo.php');
-	
+
 	include	('../../Models/modelsMail.php');
 	
 	include	('../../Models/modelsUsuario.php');
@@ -15,9 +15,18 @@
 	
 	$configUser = new controllerConfigUser();
 	
-	if(isset($_POST['inputPassword1']) && 
-	isset($_POST['inputPassword2'])	){
-		$configUser->push_registros($_POST);
+	if(	isset($_POST['inputNameUpdate']) &&
+		isset($_POST['inputMailUpdate']) &&
+		isset($_POST['inputPassword1Update']) &&
+		isset($_POST['inputPassword2Update']) ){
+		$datos = array(
+			'id_usuario'	=>$_SESSION['id_usuario'],
+			'name'			=>$_POST['inputNameUpdate'],
+			'mail'			=>$_POST['inputMailUpdate'],
+			'password1'		=>$_POST['inputPassword1Update'],
+			'password2'		=>$_POST['inputPassword2Update'],
+			);
+		$configUser->push_registros($datos);
 	}
 	
 	$registros = $configUser -> pull_registros($_SESSION['id_usuario']);
@@ -33,25 +42,25 @@
 		</h4>
 		<form class='form' method = 'POST' role='form'>
 			<div class="form-group row">
-				<label for="inputName" class="col-sm-2 col-form-label">Name</label>
+				<label for="inputNameUpdate" class="col-sm-2 col-form-label">Name</label>
 				<div class="col-sm-10">
-				  <input type='text' class='form-control' id='inputName' value ='<?php echo $registros[0]['name'];?>' name='inputName' required>
+				  <input type='text' class='form-control' id='inputNameUpdate' value ='<?php echo $registros[0]['name'];?>' name='inputNameUpdate' required>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputMail" class="col-sm-2 col-form-label">Mail</label>
+				<label for="inputMailUpdate" class="col-sm-2 col-form-label">Mail</label>
 				<div class="col-sm-10">
-				  <input type='mail' class='form-control' id='inputMail' value ='<?php echo $registros[0]['mail'];?>' name='inputMail' required>
+				  <input type='mail' class='form-control' id='inputMailUpdate' value ='<?php echo $registros[0]['mail'];?>' name='inputMailUpdate' required>
 				</div>
 			</div>
 			<div class="form-group row">
-				<label for="inputPassword1" class="col-sm-2 col-form-label">Password</label>
+				<label for="inputPassword1Update" class="col-sm-2 col-form-label">Password</label>
 				<div class="col-sm-5">
-				  <input type='password' class='form-control' id='inputPassword1' placeholder='password' name='inputPassword1' required autofocus>
+				  <input type='password' class='form-control' id='inputPassword1Update' placeholder='password' name='inputPassword1Update' required autofocus>
 				</div>
 				<div class="col-sm-5">
-					<label for='inputPassword2' class='sr-only'>Repet Password</label>
-					<input type='password' class='form-control' id='inputPassword2' placeholder='repet password' name='inputPassword2' required>
+					<label for='inputPassword2Update' class='sr-only'>Repet Password</label>
+					<input type='password' class='form-control' id='inputPassword2Update' placeholder='repet password' name='inputPassword2Update' required>
 				</div>
 			</div>
 			<div class="form-group row">

@@ -6,6 +6,7 @@ Contine las clases
 		
 		public $muestra_errores = false;
 		public $muestra_exitos 	= false;
+		public $dataUser		;
 		
 		//Constructor de clase
 		function __construct(){
@@ -16,7 +17,7 @@ Contine las clases
 			Función para obtener registros de BD y registrarlos en forma de arreglo
 		**/
 		public function pull_registros($id){
-			$rs = $this->consulta_sql(' select * from USUARIO where id_usuario = "'.$id.'"  ');
+			$rs = $this->consulta_sql(' select * from USUARIO where id_usuario = "'.$id.'"');
         	$rows = $rs->GetArray();
 			return $rows;
 		}
@@ -26,39 +27,72 @@ Contine las clases
 		**/
 		public function push_registros($datos){
 			//Verificar coincidencia de contraseñas
-			if($datos['inputPassword1']===$datos['inputPassword2']){
-				//Validar campos
-				//..
-				//..
-				//Enviar correo de confirmación
-					//instancia de modelMail
-					$mail = new modelMail();
-					//Cuerpo del mensaje
-					$menssage 	= 'Se ha modificado la información de usuario en INFINISH QMS
-					
-					Gracias';
-					//Ausnto del mensaje
-					$subject 	= 'INFINISH QMS user information ';
-					$recipient	= $datos['inputMail'];
-					
-					//Funcion que envía el mail
-					$mail->sendMail($recipient,$subject,$menssage);
+			if($datos['password1']===$datos['password2']){					
 				//Actualizar registros
-					$rowsAct =	array(
-						'name' 				=> array(),
-						'mail'				=> array(),
-						'password'			=> array(),
-						'reset_password'	=> array(),
+					if( isset($datos['user']) &&
+						isset($datos['reset_password']) &&
+						isset($datos['tipo'])){
+						//Crear arreglo con valores
+						$rowsAct =	array(
+						'user'				=> $datos['user']				,
+						'name' 				=> $datos['name']				,
+						'mail'				=> $datos['mail']				,
+						'password'			=> md5($datos['password1'])		,
+						'reset_password'	=> (int)$datos['reset_password'],
+						'tipo'				=> (int)$datos['tipo']			,
 						);
-					//Asignar valores a las columnas para actualizar BD
-					$rowsAct['name']			= $datos['inputName'];
-					$rowsAct['mail']			= $datos['inputMail'];
-					$rowsAct['password']		= md5($datos['inputPassword1']);
-					$rowsAct['reset_password']	= 0;
-					//Realiza la actualización en la BD
-					if(!$this->set_bd((int)$_SESSION['id_usuario'],$rowsAct)){
-						$this->muestra_exitos	= true;
-						$this->success[]		= 'successful update';
+					}else{
+						//Crear arreglo con valores
+						$rowsAct =	array(
+						'name' 				=> $datos['name']			,
+						'mail'				=> $datos['mail']			,
+						'password'			=> md5($datos['password1'])	,
+						'reset_password'	=> 0,
+						);
+					}
+					
+					//Verificar si se actualizará un registro o es un nuevo registro
+					if(isset($datos['id_usuario'])	&& (int)$datos['id_usuario']>0){
+						//Realiza la actualización en la BD
+						if(!$this->set_bd((int)$datos['id_usuario'],$rowsAct)){
+							$this->muestra_exitos	= true;
+							$this->success[]		= 'successful update';
+							
+							//Enviar correo de confirmación
+							//instancia de modelMail
+							$mail = new modelMail();
+							//Cuerpo del mensaje
+							$menssage 	= 'The user information was modified in iQMS.
+							Thanks';
+							//Ausnto del mensaje
+							$subject 	= 'iQMS user information ';
+							$recipient	= $datos['mail'];
+							
+							//Funcion que envía el mail
+							$mail->sendMail($recipient,$subject,$menssage);
+						}else{
+							$this->muestra_errores = true;
+						}
+					}else{
+						//Realiza inserción en la BD
+						if($this->insert_bd($datos)){
+							$this->muestra_exitos	= true;
+							$this->success[]		= 'Success adding user';
+							//Enviar correo de confirmación
+							//instancia de modelMail
+							$mail = new modelMail();
+							//Cuerpo del mensaje
+							$menssage 	= 'Successfully registered user in iQMS.
+							Thanks';
+							//Ausnto del mensaje
+							$subject 	= 'iQMS User Registration';
+							$recipient	= $datos['mail'];
+							
+							//Funcion que envía el mail
+							$mail->sendMail($recipient,$subject,$menssage);
+						}else{
+							$this->muestra_errores = true;
+						}
 					}
 			}else{
 				$this->muestra_errores = true;
@@ -66,6 +100,30 @@ Contine las clases
 			}
 		}
 		
+		
+		/**
+			FUNCIÓN PARA ELIMINAR Registros
+		**/
+		public function delete_registros($data){
+			if($this->delete_db((int)$data['id_usuario'])){
+				$this->muestra_exitos	= true;
+				$this->success[]		= 'Success deleting user';
+				//Enviar correo de confirmación
+				//instancia de modelMail
+				$mail = new modelMail();
+				//Cuerpo del mensaje
+				$menssage 	= 'Successfully deleted user information in IQMS.
+				Thanks';
+				//Ausnto del mensaje
+				$subject 	= 'iQMS User Deleted';
+				$recipient	= $data['mail'];
+				
+				//Funcion que envía el mail
+				$mail->sendMail($recipient,$subject,$menssage);
+			}else{
+				$this->muestra_errores = true;
+			}
+		}
 				
 		/**
 		Función que crea una contraseña temporal , actualiza la información en la BD y envia un correo de aviso
@@ -123,7 +181,7 @@ Contine las clases
 		Función para general select con usuarios y primer registro diferentes
 		@id			- Id para <SELECT>
 		@class		- Clase para >SELECT>
-		@option		- Arregloq ue contiene las opciones
+		@option		- Arreglo que contiene las opciones
 		@valor		- valor para el primer registro (Diferente)
 		@texto		- Información dentro del opcion diferente
 		**/

@@ -3,6 +3,8 @@
 	
 	//Header
 	include ('header-navbar.php');
+	//Seguridad 
+	include ('../../Controllers/controlSecurity-Admin.php');
 	
 	include ('../../librs/adodb5/adodb-pager.inc.php');
 	include ('../../librs/adodb5/adodb.inc.php');
@@ -11,13 +13,79 @@
 	include	('../../Models/modelsModelo.php');
 	
 	include	('../../Models/modelsMail.php');
+	include	('../../Models/modelsER.php');
 	
 	include	('../../Models/modelsUsuario.php');
 	include	('../../controllers/controlConfig-user.php');
+	//include	('../../controllers/controlConfig-user-AX.php');
 	
 	$configUser = new controllerConfigUser();
 	
+	if(isset($_POST['update'])){
+		if($_POST['inputId']==0){
+			if(	isset($_POST['inputUserUpdate']) 		&&
+				isset($_POST['inputNameUpdate']) 		&&
+				isset($_POST['inputMailUpdate']) 		&&
+				isset($_POST['inputPassword1Update']) 	&&
+				isset($_POST['inputPassword2Update']) 	&&
+				isset($_POST['inputTipoUpdate'])
+				){
+					//Insertar
+				if(isset($_POST['inputResetUpdate']))
+					$reset=1;
+				else
+					$reset=0;
+				$datos = array(
+				'user'			=>$_POST['inputUserUpdate'],
+				'name'			=>$_POST['inputNameUpdate'],
+				'mail'			=>$_POST['inputMailUpdate'],
+				'password1'		=>$_POST['inputPassword1Update'],
+				'password2'		=>$_POST['inputPassword2Update'],
+				'reset_password'=>$reset,
+				'tipo'			=>$_POST['inputTipoUpdate'],
+				);
+				$configUser->push_registros($datos);
+			}
+		}else{
+			if(	isset($_POST['inputUserUpdate']) 		&&
+				isset($_POST['inputNameUpdate']) 		&&
+				isset($_POST['inputMailUpdate']) 		&&
+				isset($_POST['inputPassword1Update']) 	&&
+				isset($_POST['inputPassword2Update']) 	&&
+				isset($_POST['inputTipoUpdate'])
+				){
+				//Modificar
+				if(isset($_POST['inputResetUpdate']))
+					$reset=1;
+				else
+					$reset=0;
+				$datos = array(
+				'id_usuario'	=>$_POST['inputId'],
+				'user'			=>$_POST['inputUserUpdate'],
+				'name'			=>$_POST['inputNameUpdate'],
+				'mail'			=>$_POST['inputMailUpdate'],
+				'password1'		=>$_POST['inputPassword1Update'],
+				'password2'		=>$_POST['inputPassword2Update'],
+				'reset_password'=>$reset,
+				'tipo'			=>$_POST['inputTipoUpdate'],
+				);
+				$configUser->push_registros($datos);
+			}
+		}
+	}
+	if(isset($_POST['delete'])){
+		if($_POST['inputId']==0){
+		}else{
+			$datos= array(
+			'id_usuario'	=>$_POST['inputId'],
+			'mail'			=>$_POST['inputMailUpdate'],
+			);
+			$configUser->delete_registros($datos);
+		}
+	}
+	
 ?>
+
 
 <div id='content'>
 	<div class='header'>
@@ -69,7 +137,7 @@
 				<div class="form-group row">
 					<div class='col-md-10 offset-md-2'>
 						<div class="form-check">
-						  <input class="form-check-input" type="checkbox" value="" id="inputResetUpdate" checked>
+						  <input class="form-check-input" type="checkbox" value="1" id="inputResetUpdate" name='inputResetUpdate'checked>
 						  <label class="form-check-label" for="inputResetUpdate">
 							Request new password
 						  </label>
@@ -79,8 +147,8 @@
 				<div class="form-group row">
 					<label for='inputTipoUpdate' class='col-sm-2 col-form-label'>Role</label>
 					<div class='col-sm-3'>
-						<select id='inputTipo' class='form-control' name='inputTipoUpdate' required>
-						  <option value="0" selected>General</option>
+						<select id='inputTipoUpdate' class='form-control' name='inputTipoUpdate' required>
+						  <option value="2" selected>General</option>
 						  <option value="1">Administrator</option>
 						</select>
 					</div>
@@ -104,31 +172,34 @@
 					?>
 				</div>
 				<div class="form-group row">
-					<button type="submit" class="btn btn-primary col-md-3 offset-md-2" name='update'>Update</button>
+					<button type="submit" class="btn btn-primary col-md-3 offset-md-2" name='update'>Insert/Update</button>
 				</div>
 			</div><!-- form-update -->
 			<div class='form-delete'>
 				<div class='form-group row'>
 					<label for='inputUserDelete' class='col-md-2 col-form-label'>User</label>
 					<div class='col-md-3'>
-						<input type='text' class='form-control' id='inputUserDelete' name='inputUserDelete' >
+						<input type='text' class='form-control' id='inputUserDelete' name='inputUserDelete' disabled>
 					</div>
 					<label for='inputNameDelete' class='col-md-2 col-form-label'>Name</label>
 					<div class='col-md-5'>
-						<input type='text' class='form-control' id='inputNameDelete' name='inputNameDelete' >
+						<input type='text' class='form-control' id='inputNameDelete' name='inputNameDelete' disabled>
 					</div>
 				</div>
 				<div class='form-group row'>
 					<label for='inputMailDelete' class='col-sm-2 col-form-label'>Mail</label>
 					<div class='col-sm-10'>
-						<input type='mail' class='form-control' id='inputMailDelete' name='inputMailDelete' >
+						<input type='mail' class='form-control' id='inputMailDelete' name='inputMailDelete' disabled>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for='inputTipeDelete' class='col-md-2 col-form-label'>Role</label>
-						<div class='col-md-3'>
-							<input type='text' class='form-control' id='inputTipeDelete' name='inputTipeDelete' >
-						</div>
+					<label for='inputTipoDelete' class='col-sm-2 col-form-label'>Role</label>
+					<div class='col-sm-10'>
+						<select id='inputTipoDelete' class='form-control' name='inputTipoDelete' disabled>
+						  <option value="2" selected>General</option>
+						  <option value="1">Administrator</option>
+						</select>
+					</div>
 				</div>
 				<div class="form-group row">
 					<?php

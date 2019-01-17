@@ -13,11 +13,12 @@ class modelUsuario extends modelModelo{
 		'mail'				=>array(),
         'password'			=>array(),
 		'reset_password'	=>array(),
+		'tipo'				=>array(),
     );
     
-	//Variable que almacena errores
-    public $errores = array( );
-	public $success	= array( );
+	//Variable que almacena errores o éxito
+    public $errores = array();
+	public $success	= array();
     
 	//Variables locales para manejo de columnas
     private $user;
@@ -25,6 +26,7 @@ class modelUsuario extends modelModelo{
 	private $mail;
     private $password;
 	private	$reset_password;
+	private	$tipo;
 	
     
     function usuario(){
@@ -60,28 +62,29 @@ class modelUsuario extends modelModelo{
 	public function get_reset_password(){
         return $this->reset_password;
     }
+	public function get_tipo(){
+        return $this->tipo;
+    }
 
 	/**
 		Asignar valores a cada atributo
 	**/
-	//Asignar valor a atributo usuario
-
+	//Asignar valor a atributo user, único
     public function set_user($valor){
-
 		///Expresión regular para validad estructura nombre
-        $er = new Er();
+        $er = new RegularExpression();
         if ( !$er->valida_nombre($valor) ){
-            $this->errores[] = "Usuario ".$valor." NO valido ";
-        }
-
-        $rs = $this->consulta_sql("select * from USUARIO where user = '$valor'");
-        $rows = $rs->GetArray();
-        
-        if(count($rows) > 0){
-            $this->errores[] = "Este usuario (".$valor.") ya esta registrado"; 
+            $this->errores[] = 'User not valid, special characters and numbers are not allowed, length 3-25 characters.';
         }else{
-            $this->usuario = trim($valor);
-        }
+			//Validar que no exista un registro identico
+			$rs = $this->consulta_sql('select user from USUARIO where user = "'.$valor.'"');
+			$rows = $rs->GetArray();
+			if(count($rows) > 0){
+				$this->errores[] = 'User name not available.'; 
+			}else{
+				$this->user = trim($valor);
+			}
+		}        
     }
 	//Asignar valor a atributo nombre
     public function set_name($valor){
@@ -121,7 +124,7 @@ class modelUsuario extends modelModelo{
 	@atrib	Arreglo coon estrustura @atrib['nombre de la columna'] => Valor nuevo
 	*/
 	public function set_bd($id,$atrib){
-		if (is_integer($id)) {			
+		if (is_integer($id)) {		
 			$sql = "SELECT * FROM  " . $this->nombre_tabla . " 
                 WHERE ".$this->pk." = " . $id;
 			$record = $this->db->Execute($sql);
@@ -131,9 +134,75 @@ class modelUsuario extends modelModelo{
 		}else{
 			die('OJO id no es entero (int() @variable) ');
 		}
-		
 	}
 	
+	
+	/***
+		FUNCIÓN PARA INSERTAR REGISTRO EN BD
+		
+		@data	Arreglo con estructura @data['nombre de la columna'] => valor insertado
+	*/
+	public function insert_bd($data){
+	  //Verificar integridad de atributos
+	    $er 		= new RegularExpression();
+		$resultado 	= false;
+		// 'user' sin caracteres especiales y longitud de 3-25 vcaracteres
+		if ( !$er->valida_nombre($data['user']) ){
+          $this->errores[] = 'User not valid, special characters and numbers are not allowed, length 3-25 characters.';
+        }else{
+		  // 'user' no existe en base de datos
+		  $rs = $this->consulta_sql('select * from USUARIO where user = "'.$data['user'].'"');
+		  $rows = $rs->GetArray();
+		  if(count($rows) > 0){
+			$this->errores[] = 'User name not available.'; 
+		  }else{
+			// 'name' sin caracteres especiales
+			if( !$er->valida_texto($data['name'],5,100)){
+			  $this->errores[] = 'NAME not valid, special characters and numbers are not allowed. length 5-100 characters.';
+			}else{
+			  // 'Mail' sin caracteres permitidos y extención de infinish
+			  if( !$er->valida_mail_local($data['mail'],'infinishai.com.mx')){
+				$this->errores[] = 'MAIL not valid, special characters and numbers are not allowed. only internal emails are allowed';
+			  }else{
+				// 'mail' no existe en base de datos
+				$rs = $this->consulta_sql('select * from USUARIO where mail = "'.$data['mail'].'"');
+				$rows = $rs->GetArray();
+				if(count($rows) > 0){
+				  $this->errores[] = 'User MAIL not available.'; 
+				}else{
+				  // validación 'reset_password' respuesta binaria 0 1
+				  if($data['reset_password']<0 || $data['reset_password']>1){
+					$this->errores[] = 'RESET PASSWORD not allowed.';
+				  }else{
+					//validación 'tipo' caracteres permitidos, sólo numeros enteros
+					if(!$er->valida_numero_entero($data['tipo'])){
+					  $this->errores[] = 'TIPO not allowed.';
+					}else{
+					  //Insertar en BD
+					  $resultado = $this->inserta($rs, $data);
+					}// validación 'tipo' expresión regular
+				  }// validación 'reset_password' 
+				}// validación 'mail' duplicidad
+			  }// validación 'mail' expresión regular
+			}// validación 'name' expresión regular
+		  }// validación 'user' duplicidad
+		}// validación 'user' expresión regular
+		return $resultado;
+	}
+	
+	/**
+		FUNCIÓN PARA ELIMINAR UN REGISTRO EN LA BASE DE DATOS
+	**/
+	public function delete_db($id){
+		$resul = false;
+		//Validar id
+		if(isset($id)&& $id>0){
+			$resul = $this->elimina($id);
+		}else{
+			$this->errores[] = 'Could not delete record.';
+		}
+		return $resul;
+	}
 	
 }
 

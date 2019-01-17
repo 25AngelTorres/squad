@@ -160,7 +160,8 @@
 #content .body{
 	padding:	10px 25px 25px 25px;
 	width:		100%;
-	height:		calc(100% - 56px);
+	/*height:		calc(100% - 56px);*/
+	height:		auto;
 	position:	relative;
 	background:	white;
 	border-radius: 10px 10px 10px 10px;
@@ -193,4 +194,20 @@
 	color: #fff;
 	background:	#dc3545;
 	border-color: #dc3545;
+}
+
+
+
+/*Para DOCUMENTATION MANAGEMENT*/
+.managementFormElements{
+	display: none;
+	padding: 5px 10px 5px 10px;
+}
+.managementForm{
+	padding: 20px 10px 5px 10px;
+}
+.managementForm.atention{
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0,123,255,0.4);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0,123,255,0.4);
+	box-shadow: 0px 0px 10px 0px rgba(0,123,255,0.4);
 }
