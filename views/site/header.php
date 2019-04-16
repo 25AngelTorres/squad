@@ -38,6 +38,7 @@
 		<!-- Hojas de Estilo -->
 		<!-- Bootstrap core CSS-->
 		<link rel='stylesheet' type='text/css' href='../css/bootstrap.min.css' >
+		<link rel='stylesheet' type='text/css' href='../css/bootstrap-datepicker.css' >
 		<!-- fonts a utilizar-->
 		<link rel='stylesheet' type='text/css' href='../../librs/fontawesome-free/css/all.min.css' >
 		

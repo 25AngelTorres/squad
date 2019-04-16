@@ -107,10 +107,10 @@
     </div>
 	
 	<!---Contenido--->
-	<div class='wrapper'>
+	<div class='conteiner'>
 		
 		<!-- sidebar-left -->
-		<div id='sidebar-left' class=''>
+		<div id='sidebar-left' class='span'>
 			<!-- lista isos -->
 			<ul	id='' class='navbar-nav'>
 				<li id='sidebar-father-1' class='nav-item'>

@@ -10,7 +10,7 @@
 			$this->db = ADONewConnection('mysqli');
 			$this->db->debug = false;
 					   //ip     user      pass    bd
-			$this->db->Connect('localhost','root','','iqms');
+			$this->db->Connect('localhost','root','','i_qms');
 			$this->db->setCharset('utf8');
 		}
 	}

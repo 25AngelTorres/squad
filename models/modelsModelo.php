@@ -35,14 +35,13 @@ class modelModelo extends modelConexion {
 	FUNCIÓN PARA ACTUALIZAR UN REGISTRO EN LA BD
 	**/
     public function actualiza($sql_update) {
-      return $this->get_error($this->db->Execute($sql_update), 'Error al actualizar');
+      return $this->get_error($this->db->Execute($sql_update), 'Error al actualizar -----'.$sql_update);
     }
 	
 	/**
 	FUNCION PARA ELIMINAR UN REGISTRO EN LA BD a travez de un id
 	**/
-	public function elimina($id) {
-		$sql = 'delete from '.$this->nombre_tabla.' where '.$this->pk.' = '.$id;
+	public function elimina($sql) {
         return $this->get_error($this->db->Execute($sql), "Error al eliminar");
     }
 

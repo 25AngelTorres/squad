@@ -63,6 +63,23 @@ public function valida_mail_local($valor, $dominio){
 			 return false;
 		} 
 	}
+	public function valida_texto2($valor,$min,$max){
+		$exp_reg = "/^[a-zA-Z_ñÑáéíóúÁÉÍÓÚ0-9., -]{".$min.",".$max."}$/";
+		if (preg_match($exp_reg, $valor)) {
+			 return true;
+		} else { 
+			 return false;
+		} 
+	}
+//Hexadecimal
+	public function valida_hexadecimal($valor,$max){
+		$exp_reg = "^[a-fA-F0-9]{".$max."}$";
+		if (preg_match($exp_reg, $valor)) {
+			 return true;
+		} else { 
+			 return false;
+		} 
+	}
 //Fecha	
 	public function valida_fecha($fecha){
 	$sep = " [\/\-] ";

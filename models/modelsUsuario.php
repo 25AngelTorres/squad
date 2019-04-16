@@ -178,8 +178,8 @@ class modelUsuario extends modelModelo{
 					if(!$er->valida_numero_entero($data['tipo'])){
 					  $this->errores[] = 'TIPO not allowed.';
 					}else{
-					  //Insertar en BD
-					  $resultado = $this->inserta($rs, $data);
+							//Insertar en BD
+							$resultado = $this->inserta($rs, $data);
 					}// validación 'tipo' expresión regular
 				  }// validación 'reset_password' 
 				}// validación 'mail' duplicidad

@@ -84,53 +84,28 @@
 /*sidebar izquierdo*/
 
 /*Barra acortada*/
-
-
+#sidebar-left.span{
+	width:			230px;
+}
 #sidebar-left{
 	background:		var(--mainBack3);
-	height:			calc(100% - 56px);
-	width:			200px;
+	width:			50px;
 	color:			white;
-	position:		absolute;
 	padding:		5px 10px;
 	vertical-align:	middle;
-}
-#sidebar-left li{
-	padding-bottom: 10px;
-}
-#sidebar-left i{
-	font-size:		25px;
-}
-#sidebar-left ul{
-	list-style:	none;
-	padding-left:	10px;
-}
-
-#sidebar-left .nav-link{
-	text-align:			left;
-	text-decoration: 	none;
-	color:				white;
-}
-#sidebar-left .nav-link:hover{
-	text-shadow:	0 0 25px #fff;
-}
-#sidebar-left .nav-link span{
 	position:		absolute;
-	width:			100%;
-	padding-left:	15px;
+	z-index:		50;
+	-webkit-transition: width 0.7s; /* For Safari 3.1 to 6.0 */
+	transition: width 0.7s;
 }
-
-/*Elemento en la parte inferior*/
-#sidebar-left .bottom{
-	top:		calc(100% - 56px);
-	position:	absolute;
+#sidebar-left:hover{
+	width:			230px;
 }
-
 
 
 
 /*Contenido*/
-/*Contenido expandido*/
+/*Contenido expandido*
 #content{
 	width:	calc(100% - 200px);
 }
@@ -138,14 +113,22 @@
 #content{
 	background:	var(--mainBack1);
 	right:		0%;
+	width:		100%;
 	color:		black;
 	position:	absolute;
-	height:		calc(100% - 56px);
-	padding-left:	25px;
+	height:		relative;
+	padding-left:	255px;
 	padding-right:	25px;
 	padding-top:	10px;
 	padding-bottom:	25px;
 	font-weight:	100;
+	-webkit-transition: width 0.7s; /* For Safari 3.1 to 6.0 */
+	transition: width 0.7s;
+}
+#content.span{
+	padding-left:	75px;	
+	-webkit-transition: width 0.7s; /* For Safari 3.1 to 6.0 */
+	transition: width 0.7s;
 }
 #content .header{
 	width:		100%;
@@ -201,10 +184,14 @@
 /*Para DOCUMENTATION MANAGEMENT*/
 .managementFormElements{
 	display: none;
-	padding: 5px 10px 5px 10px;
+	padding: 5px 5px 5px 5px;
 }
 .managementForm{
 	padding: 20px 10px 5px 10px;
+	margin-bottom:	30px;
+}
+.managementForm.hide{
+	display:	none;
 }
 .managementForm.atention{
 	-webkit-box-shadow: 0px 0px 10px 0px rgba(0,123,255,0.4);
